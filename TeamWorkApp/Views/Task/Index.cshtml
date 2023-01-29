@@ -23,6 +23,9 @@
         <th>
             @Html.DisplayNameFor(model => model.TaskStatus)
         </th>
+        <th>
+            Assigned to
+        </th>
         <th></th>
     </tr>
 
@@ -41,8 +44,13 @@
             @Html.DisplayFor(modelItem => item.TaskStatus)
         </td>
         <td>
+            @foreach (var t in item.TeamMembers)
+            {
+                <span>@t.Name</span>
+            }
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.TaskID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TaskID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.TaskID })
         </td>
     </tr>

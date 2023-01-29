@@ -21,21 +21,6 @@ namespace TeamWorkApp.Controllers
             return View(db.TeamMembers.ToList());
         }
 
-        // GET: TeamMember/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TeamMember teamMember = db.TeamMembers.Find(id);
-            if (teamMember == null)
-            {
-                return HttpNotFound();
-            }
-            return View(teamMember);
-        }
-
         // GET: TeamMember/Create
         public ActionResult Create()
         {

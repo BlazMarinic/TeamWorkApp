@@ -1,5 +1,5 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
+using TeamWorkApp.Extensions;
 
 namespace TeamWorkApp
 {
@@ -21,10 +21,17 @@ namespace TeamWorkApp
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.js"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/scripts").NonOrdering().Include(
+                "~/Scripts/select2.min.js",
+                "~/Scripts/global.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
+                "~/Content/select2.min.css",
                 "~/Content/site.css"));
+            
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

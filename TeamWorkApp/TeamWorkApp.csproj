@@ -128,6 +128,7 @@
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TeamMemberController.cs" />
     <Compile Include="Data\TeamWorkAppContext.cs" />
+    <Compile Include="Extensions\NonOrderingBundleOrderer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -149,6 +150,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\global.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />

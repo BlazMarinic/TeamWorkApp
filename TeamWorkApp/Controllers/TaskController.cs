@@ -13,32 +13,47 @@ namespace TeamWorkApp.Controllers
 {
     public class TaskController : Controller
     {
-        private TeamWorkAppContext db = new TeamWorkAppContext();
+        private readonly TeamWorkAppContext _db = new TeamWorkAppContext();
+        
+        //Helper function to retrieve team members from DB
+        private void PopulateAssignedTeamMembers(Task task = null)
+        {
+            if (task != null)
+            {
+                var alreadyAssigned = new List<string>();
+                foreach (var x in task.TeamMembers)
+                {
+                    alreadyAssigned.Add(x.TeamMemberID.ToString());
+                }
+                ViewBag.AlreadyAssignedteamMembers = alreadyAssigned.ToArray();   
+            }
+            
+            var viewModel = new List<AssignedTeamMembers>();
+            var allTeamMembers = _db.TeamMembers;
+            
+            foreach (var t in allTeamMembers)
+            {
+                viewModel.Add(new AssignedTeamMembers
+                {
+                    TeamMemberId = t.TeamMemberID,
+                    TeamMemberName = t.Name
+                });
+            }
+
+            ViewBag.TeamMembers = viewModel;
+        }
 
         // GET: Task
         public ActionResult Index()
         {
-            return View(db.Tasks.ToList());
-        }
-
-        // GET: Task/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Task task = db.Tasks.Find(id);
-            if (task == null)
-            {
-                return HttpNotFound();
-            }
-            return View(task);
+            var tasks = _db.Tasks.Include(x => x.TeamMembers);
+            return View(tasks.ToList());
         }
 
         // GET: Task/Create
         public ActionResult Create()
         {
+            PopulateAssignedTeamMembers();
             return View();
         }
 
@@ -47,30 +62,40 @@ namespace TeamWorkApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TaskID,TaskName,TaskDescription,TaskDueDate,TaskStatus")] Task task)
+        public ActionResult Create([Bind(Include = "TaskID,TaskName,TaskDescription,TaskDueDate,TaskStatus")] Task task, string[] selectedTeamMembers)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(task);
+
+            //Check for selected team members on created task
+            if (selectedTeamMembers != null)
             {
-                db.Tasks.Add(task);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                task.TeamMembers = new List<TeamMember>();
+                foreach (var tm in selectedTeamMembers)
+                {
+                    var teamMemberToAdd = _db.TeamMembers.Find(int.Parse(tm));
+                    task.TeamMembers.Add(teamMemberToAdd);
+                }
             }
 
-            return View(task);
+            _db.Tasks.Add(task);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Task/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Task task = db.Tasks.Find(id);
+
+            Task task = _db.Tasks.Find(id);
+
+            PopulateAssignedTeamMembers(task);
+            
             if (task == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(task);
         }
 
@@ -79,15 +104,28 @@ namespace TeamWorkApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TaskID,TaskName,TaskDescription,TaskDueDate,TaskStatus")] Task task)
+        public ActionResult Edit([Bind(Include = "TaskID,TaskName,TaskDescription,TaskDueDate,TaskStatus")] Task task, string[] selectedTeamMembers)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(task);
+            
+            _db.Tasks.Attach(task);
+            _db.Entry(task).Collection(a => a.TeamMembers).Load();
+            
+            //Check for selected team members on created task
+            if (selectedTeamMembers != null)
             {
-                db.Entry(task).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                task.TeamMembers = new List<TeamMember>();
+                foreach (var tm in selectedTeamMembers)
+                {
+                    var teamMemberToAdd = _db.TeamMembers.Find(int.Parse(tm));
+                    task.TeamMembers.Add(teamMemberToAdd);
+                }
             }
-            return View(task);
+
+            _db.Entry(task).State = EntityState.Modified;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Task/Delete/5
@@ -97,7 +135,7 @@ namespace TeamWorkApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Task task = db.Tasks.Find(id);
+            Task task = _db.Tasks.Find(id);
             if (task == null)
             {
                 return HttpNotFound();
@@ -110,9 +148,9 @@ namespace TeamWorkApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Task task = db.Tasks.Find(id);
-            db.Tasks.Remove(task);
-            db.SaveChanges();
+            Task task = _db.Tasks.Find(id);
+            _db.Tasks.Remove(task);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -120,7 +158,7 @@ namespace TeamWorkApp.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

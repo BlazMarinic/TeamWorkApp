@@ -46,6 +46,16 @@
                 @Html.ValidationMessageFor(model => model.TaskStatus, "", new { @class = "text-danger" })
             </div>
         </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.TeamMembers, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @{
+                    List<TeamWorkApp.Models.AssignedTeamMembers> teamMembers = ViewBag.TeamMembers;
+                    @Html.DropDownList("selectedTeamMembers", new SelectList(teamMembers, "TeamMemberID", "TeamMemberName"), null, new { @class = "form-control multi-select", multiple = "multiple" })
+                }
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
