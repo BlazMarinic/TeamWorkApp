@@ -33,6 +33,8 @@
 {
     var dueDate = item.TaskDueDate.ToShortDateString();
     var taskName = $"Task_{item.TaskID}";
+    var noOfTeamMembers = item.TeamMembers.Count;
+    int i = 1;
     <tr>
         <td>
             @taskName
@@ -47,14 +49,23 @@
             @Html.DisplayFor(modelItem => item.TaskStatus)
         </td>
         <td>
+            
             @foreach (var t in item.TeamMembers)
             {
                 <span>@t.Name</span>
+
+                if (noOfTeamMembers == i)
+                {
+                    continue;
+                }
+                    
+                <span>|</span>
+                i++;
             }
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TaskID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TaskID })
+            @Html.ActionLink("Uredi", "Edit", new { id=item.TaskID }) |
+            @Html.ActionLink("Izbriši", "Delete", new { id=item.TaskID })
         </td>
     </tr>
 }
