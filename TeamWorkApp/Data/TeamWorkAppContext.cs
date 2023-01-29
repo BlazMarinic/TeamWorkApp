@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
+using TeamWorkApp.Models;
+
 
 namespace TeamWorkApp.Data
 {
@@ -19,8 +17,23 @@ namespace TeamWorkApp.Data
         {
         }
 
-        public System.Data.Entity.DbSet<TeamWorkApp.Models.TeamMember> TeamMembers { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
 
-        public System.Data.Entity.DbSet<TeamWorkApp.Models.Task> Tasks { get; set; }
+        public DbSet<Task> Tasks { get; set; }
+        
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Task>()
+                .HasMany<TeamMember>(s => s.TeamMembers)
+                .WithMany(c => c.Tasks)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("TeamMemberRefId");
+                    cs.MapRightKey("TaskRefId");
+                    cs.ToTable("TeamMemberTask");
+                });
+        }
     }
 }

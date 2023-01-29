@@ -7,12 +7,12 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj novo nalogo", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.TaskName)
+            Št.
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TaskDescription)
@@ -29,16 +29,19 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
+    var dueDate = item.TaskDueDate.ToShortDateString();
+    var taskName = $"Task_{item.TaskID}";
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.TaskName)
+            @taskName
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TaskDescription)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TaskDueDate)
+            @dueDate
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TaskStatus)
