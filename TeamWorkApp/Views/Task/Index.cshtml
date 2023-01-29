@@ -1,7 +1,13 @@
-﻿@model IEnumerable<TeamWorkApp.Models.Task>
+﻿@using TeamWorkApp.Models
+@using TaskStatus = TeamWorkApp.Models.TaskStatus
+@model IEnumerable<TeamWorkApp.Models.Task>
 
 @{
     ViewBag.Title = "Seznam opravil";
+    
+    var newTasks = Model.Where(x => x.TaskStatus.Equals(TaskStatus.New));
+    var inProgressTask = Model.Where(x => x.TaskStatus.Equals(TaskStatus.InProgress));
+    var completedTasks = Model.Where(x => x.TaskStatus.Equals(TaskStatus.Completed));
 }
 
 <h2>@ViewBag.Title</h2>
@@ -9,65 +15,76 @@
 <p>
     @Html.ActionLink("Dodaj opravilo", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Št.
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TaskDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TaskDueDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TaskStatus)
-        </th>
-        <th>
-            Assigned to
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model)
-{
-    var dueDate = item.TaskDueDate.ToShortDateString();
-    var taskName = $"Task_{item.TaskID}";
-    var noOfTeamMembers = item.TeamMembers.Count;
-    int i = 1;
-    <tr>
-        <td>
-            @taskName
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TaskDescription)
-        </td>
-        <td>
-            @dueDate
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TaskStatus)
-        </td>
-        <td>
+<div class="row">
+    <div class="col-xs-12 col-sm-4">
+        @foreach (var item in newTasks)
+        {
+            var taskName = $"Task_{item.TaskID}";
+        
+            <div class="task-card-wrapper">
+                <a href="@Url.Action("Edit", "Task", new { id = item.TaskID })">
+                    <div>@taskName</div>
+                    <div>@item.TaskDescription</div>
+                    <div>
+                        @foreach (var x in item.TeamMembers)
+                        {
+                            <span>@x.Name</span>
+                            if (x != item.TeamMembers.LastOrDefault())
+                            {
+                                <span>|</span>
+                            }
+                        }
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        @foreach (var item in inProgressTask)
+        {
+            var taskName = $"Task_{item.TaskID}";
+
+            <div class="task-card-wrapper">
+                <a href="@Url.Action("Edit", "Task", new { id = item.TaskID })">
+                    <div>@taskName</div>
+                    <div>@item.TaskDescription</div>
+                    <div>
+                        @foreach (var x in item.TeamMembers)
+                        {
+                            <span>@x.Name</span>
+                            if (x != item.TeamMembers.LastOrDefault())
+                            {
+                                <span>|</span>
+                            }
+                        }
+                    </div>
+                </a>
+            </div>
             
-            @foreach (var t in item.TeamMembers)
-            {
-                <span>@t.Name</span>
+        }
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        @foreach (var item in completedTasks)
+        {
+            var taskName = $"Task_{item.TaskID}";
+            <div class="task-card-wrapper">
+                <a href="@Url.Action("Edit", "Task", new { id = item.TaskID })">
+                    <div>@taskName</div>
+                    <div>@item.TaskDescription</div>
+                    <div>
+                        @foreach (var x in item.TeamMembers)
+                        {
+                            <span>@x.Name</span>
+                            if (x != item.TeamMembers.LastOrDefault())
+                            {
+                                <span>|</span>
+                            }
+                        }
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
 
-                if (noOfTeamMembers == i)
-                {
-                    continue;
-                }
-                    
-                <span>|</span>
-                i++;
-            }
-        </td>
-        <td>
-            @Html.ActionLink("Uredi", "Edit", new { id=item.TaskID }) |
-            @Html.ActionLink("Izbriši", "Delete", new { id=item.TaskID })
-        </td>
-    </tr>
-}
-
-</table>
+</div>
