@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<TeamWorkApp.Models.TeamMember>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Seznam članov ekipe";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj novega člana", "Create")
 </p>
 <table class="table">
     <tr>

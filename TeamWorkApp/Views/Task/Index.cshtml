@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<TeamWorkApp.Models.Task>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Seznam opravil";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Dodaj novo nalogo", "Create")
+    @Html.ActionLink("Dodaj opravilo", "Create")
 </p>
 <table class="table">
     <tr>

@@ -2,11 +2,11 @@
 @model TeamWorkApp.Models.Task
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Uredi";
     string[] set = ViewBag.AlreadyAssignedteamMembers;
 }
 
-<h2>Edit</h2>
+<h2>@ViewBag.Title</h2>
 
 
 @using (Html.BeginForm())
