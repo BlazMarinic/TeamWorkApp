@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    color: #5A5A5A;
+    font-family: Inter, sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -17,15 +19,80 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.form-control {
+    border-radius: 4px !important;
+    height: 34px !important;
+    font-size: 16px !important;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+a {
+    color: #5A5A5A;
+    text-decoration: none;
+}
+a:hover {
+    color: #080808;
+    text-decoration: none;
+}
+
+h3 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    font-size: 19px;
+    line-height: 23px;
+    font-weight: 600;
+    border-bottom: 1px solid #5a5a5a;
 }
 
 .task-card-wrapper {
     background-color: #f0f0f0;
     border-radius: 8px;
     padding: 8px 16px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 6px -1px, rgba(0, 0, 0, 0.06) 0 2px 4px -1px;
 }
+
+.task-card-wrapper .task-name {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;    
+    margin: 0 -15px 12px;
+    padding: 0 15px 4px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.task-card-wrapper .task-name a {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.task-card-wrapper .team-members {
+    font-weight: 300;
+    font-size: 14px;
+    margin: 24px -15px 0;
+    padding: 4px 15px 0;
+    text-align: end;
+}
+
+.task-card-wrapper .task-desc {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #080808;
+}
+.select2-container {
+    display: block !important;
+}
+
+.select2-container .select2-dropdown {
+    border-radius: 8px;
+}
+
+.select2-container--default .select2-selection--multiple {
+    padding: 0 7px;
+}
+

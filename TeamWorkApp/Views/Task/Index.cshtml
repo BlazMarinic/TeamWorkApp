@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = "Seznam opravil";
-    
+
     var newTasks = Model.Where(x => x.TaskStatus.Equals(TaskStatus.New));
     var inProgressTask = Model.Where(x => x.TaskStatus.Equals(TaskStatus.InProgress));
     var completedTasks = Model.Where(x => x.TaskStatus.Equals(TaskStatus.Completed));
@@ -12,77 +12,84 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Dodaj opravilo", "Create")
-</p>
+
+<a class="btn btn-primary" href="@Url.Action("Create", "Task")">Dodaj opravilo</a>
 
 <div class="row">
     <div class="col-xs-12 col-sm-4">
+        <h3>Novo / Nedodeljeno</h3>
         @foreach (var item in newTasks)
         {
             var taskName = $"Task_{item.TaskID}";
-        
+
             <div class="task-card-wrapper">
-                <a href="@Url.Action("Edit", "Task", new { id = item.TaskID })">
-                    <div>@taskName</div>
-                    <div>@item.TaskDescription</div>
-                    <div>
-                        @foreach (var x in item.TeamMembers)
+                <div class="task-name">
+                    <span>@taskName</span>
+                    <a class="glyphicon glyphicon-new-window" href="@Url.Action("Edit", "Task", new { id = item.TaskID })"></a>
+                </div>
+                
+                <div class="task-desc">@item.TaskDescription</div>
+                <div class="team-members">
+                    @foreach (var x in item.TeamMembers)
+                    {
+                        <span>@x.Name</span>
+                        if (x != item.TeamMembers.LastOrDefault())
                         {
-                            <span>@x.Name</span>
-                            if (x != item.TeamMembers.LastOrDefault())
-                            {
-                                <span>|</span>
-                            }
+                            <span>|</span>
                         }
-                    </div>
-                </a>
+                    }
+                </div>
             </div>
         }
     </div>
     <div class="col-xs-12 col-sm-4">
+        <h3>V teku</h3>
         @foreach (var item in inProgressTask)
         {
             var taskName = $"Task_{item.TaskID}";
 
             <div class="task-card-wrapper">
-                <a href="@Url.Action("Edit", "Task", new { id = item.TaskID })">
-                    <div>@taskName</div>
-                    <div>@item.TaskDescription</div>
-                    <div>
-                        @foreach (var x in item.TeamMembers)
+                <div class="task-name">
+                    <span>@taskName</span>
+                    <a class="glyphicon glyphicon-new-window" href="@Url.Action("Edit", "Task", new { id = item.TaskID })"></a>
+                </div>
+                
+                <div class="task-desc">@item.TaskDescription</div>
+                <div class="team-members">
+                    @foreach (var x in item.TeamMembers)
+                    {
+                        <span>@x.Name</span>
+                        if (x != item.TeamMembers.LastOrDefault())
                         {
-                            <span>@x.Name</span>
-                            if (x != item.TeamMembers.LastOrDefault())
-                            {
-                                <span>|</span>
-                            }
+                            <span>|</span>
                         }
-                    </div>
-                </a>
+                    }
+                </div>
             </div>
-            
         }
     </div>
     <div class="col-xs-12 col-sm-4">
+        <h3>Zaključeno</h3>
         @foreach (var item in completedTasks)
         {
             var taskName = $"Task_{item.TaskID}";
             <div class="task-card-wrapper">
-                <a href="@Url.Action("Edit", "Task", new { id = item.TaskID })">
-                    <div>@taskName</div>
-                    <div>@item.TaskDescription</div>
-                    <div>
-                        @foreach (var x in item.TeamMembers)
+                <div class="task-name">
+                    <span>@taskName</span>
+                    <a class="glyphicon glyphicon-new-window" href="@Url.Action("Edit", "Task", new { id = item.TaskID })"></a>
+                </div>
+                
+                <div class="task-desc">@item.TaskDescription</div>
+                <div class="team-members">
+                    @foreach (var x in item.TeamMembers)
+                    {
+                        <span>@x.Name</span>
+                        if (x != item.TeamMembers.LastOrDefault())
                         {
-                            <span>@x.Name</span>
-                            if (x != item.TeamMembers.LastOrDefault())
-                            {
-                                <span>|</span>
-                            }
+                            <span>|</span>
                         }
-                    </div>
-                </a>
+                    }
+                </div>
             </div>
         }
     </div>

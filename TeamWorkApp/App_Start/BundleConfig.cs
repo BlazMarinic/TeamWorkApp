@@ -23,7 +23,7 @@ namespace TeamWorkApp
                 "~/Scripts/bootstrap.js"));
             
             bundles.Add(new ScriptBundle("~/bundles/scripts").NonOrdering().Include(
-                "~/Scripts/select2.min.js",
+                "~/Scripts/select2.full.min.js",
                 "~/Scripts/global.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

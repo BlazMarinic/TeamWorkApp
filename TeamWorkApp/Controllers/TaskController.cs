@@ -77,6 +77,10 @@ namespace TeamWorkApp.Controllers
                     task.TeamMembers.Add(teamMemberToAdd);
                 }
             }
+            else
+            {
+                task.TaskStatus = TaskStatus.New;
+            }
 
             _db.Tasks.Add(task);
             _db.SaveChanges();
@@ -121,6 +125,11 @@ namespace TeamWorkApp.Controllers
                     var teamMemberToAdd = _db.TeamMembers.Find(int.Parse(tm));
                     task.TeamMembers.Add(teamMemberToAdd);
                 }
+            }
+            else
+            {
+                task.TaskStatus = TaskStatus.New;
+                task.TeamMembers = new List<TeamMember>();
             }
 
             _db.Entry(task).State = EntityState.Modified;
