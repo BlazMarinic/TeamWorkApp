@@ -23,16 +23,16 @@ namespace TeamWorkApp.Data
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            //base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Task>()
                 .HasMany<TeamMember>(s => s.TeamMembers)
                 .WithMany(c => c.Tasks)
                 .Map(cs =>
                 {
-                    cs.MapLeftKey("TeamMemberRefId");
-                    cs.MapRightKey("TaskRefId");
-                    cs.ToTable("TeamMemberTask");
+                    cs.MapLeftKey("TaskRefId"); 
+                    cs.MapRightKey("TeamMemberRefId");
+                    cs.ToTable("TaskTeamMember");
                 });
         }
     }

@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -54,11 +57,20 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -124,6 +136,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AllTasksController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TeamMemberController.cs" />
     <Compile Include="Data\TeamWorkAppContext.cs" />
@@ -139,11 +153,25 @@
     <Compile Include="Migrations\202301291351315_b.designer.cs">
       <DependentUpon>202301291351315_b.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202301311915176_c.cs" />
+    <Compile Include="Migrations\202301311915176_c.designer.cs">
+      <DependentUpon>202301311915176_c.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202301311921586_d.cs" />
+    <Compile Include="Migrations\202301311921586_d.designer.cs">
+      <DependentUpon>202301311921586_d.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202301311927043_e.cs" />
+    <Compile Include="Migrations\202301311927043_e.designer.cs">
+      <DependentUpon>202301311927043_e.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AssignedTeamMembers.cs" />
     <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\TaskDto.cs" />
     <Compile Include="Models\TaskStatus.cs" />
     <Compile Include="Models\TeamMember.cs" />
+    <Compile Include="Models\TeamMemberDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +239,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202301291351315_b.resx">
       <DependentUpon>202301291351315_b.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202301311915176_c.resx">
+      <DependentUpon>202301311915176_c.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202301311921586_d.resx">
+      <DependentUpon>202301311921586_d.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202301311927043_e.resx">
+      <DependentUpon>202301311927043_e.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
