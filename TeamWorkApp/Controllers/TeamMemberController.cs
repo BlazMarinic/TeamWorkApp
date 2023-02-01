@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using TeamWorkApp.Data;
 using TeamWorkApp.Models;
@@ -98,7 +99,10 @@ namespace TeamWorkApp.Controllers
             TeamMember teamMember = db.TeamMembers.Find(id);
             db.TeamMembers.Remove(teamMember);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return Json(new {
+                status = true
+            });
         }
 
         protected override void Dispose(bool disposing)

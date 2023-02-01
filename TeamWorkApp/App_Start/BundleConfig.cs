@@ -24,14 +24,16 @@ namespace TeamWorkApp
             
             bundles.Add(new ScriptBundle("~/bundles/scripts").NonOrdering().Include(
                 "~/Scripts/select2.full.min.js",
+                "~/Scripts/sweetalert2.all.min.js",
                 "~/Scripts/global.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/select2.min.css",
+                "~/Content/sweetalert2.min.css",
                 "~/Content/site.css"));
             
-            BundleTable.EnableOptimizations = true;
+            //BundleTable.EnableOptimizations = true;
         }
     }
 }

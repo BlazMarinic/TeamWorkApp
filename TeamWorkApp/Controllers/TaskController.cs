@@ -160,7 +160,10 @@ namespace TeamWorkApp.Controllers
             Task task = _db.Tasks.Find(id);
             _db.Tasks.Remove(task);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            
+            return Json(new {
+                status = true
+            });
         }
 
         protected override void Dispose(bool disposing)

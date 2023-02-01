@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Activities.Statements
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -11,7 +12,11 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
+@{
+    var isTaskPage = ViewBag.Title == "Seznam opravil" ? "active" : "";
+    var isTeamMemberPage = ViewBag.Title == "Seznam članov ekipe" ? "active" : "";
+}
+<div class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -22,9 +27,8 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Task")</li>
-                <li>@Html.ActionLink("Team Members", "Index", "TeamMember")</li>
-                <li>@Html.ActionLink("Tasks", "Index", "Task")</li>
+                <li class="@isTaskPage">@Html.ActionLink("Opravila", "Index", "Task")</li>
+                <li class="@isTeamMemberPage">@Html.ActionLink("Člani ekipe", "Index", "TeamMember")</li>
             </ul>
         </div>
     </div>

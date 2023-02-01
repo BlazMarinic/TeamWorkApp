@@ -1,0 +1,192 @@
+@light-purple: #7C4DFF;
+@purple: #6200EA;
+
+body {
+  color: #5A5A5A;
+  font-family: Inter, sans-serif;
+}
+
+//Bootstrap buttons override
+.btn {
+  border-radius: 4px;
+  &-primary {
+    background-color: @purple;
+    border-color: @purple;
+  }
+  &:hover,
+  &:active,
+  &:focus,
+  &:active:focus {
+    background-color: @light-purple;
+    border-color: @light-purple;
+  }
+  &-default {
+    &:hover,
+    &:active,
+    &:focus,
+    &:active:focus {
+      background-color: @light-purple;
+      border-color: @light-purple;
+      color: #fff;
+    }
+  }
+}
+
+.navbar-default {
+  .navbar-nav {
+    li {
+      &.active {
+        a {
+          color: @purple;
+          border-bottom: 2px solid @purple;
+          background-color: transparent;
+          &:hover {
+            color: @light-purple;
+            background-color: transparent;
+            border-bottom: 2px solid @light-purple;
+          }
+        }
+      }
+      a {
+        font-size: 18px;
+        font-weight: 400;
+        &:hover {
+          color: @light-purple;
+          background-color: transparent;
+          border-bottom: 2px solid @light-purple;
+        }
+      }
+    }
+  }
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+.form-control {
+  border-radius: 4px !important;
+  height: 34px !important;
+  font-size: 16px !important;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+a {
+  color: #5A5A5A;
+  text-decoration: none;
+  
+  &:hover {
+    color: #080808;
+    text-decoration: none;  
+  }
+}
+
+h3 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  font-size: 19px;
+  line-height: 23px;
+  font-weight: 600;
+  border-bottom: 1px solid #5a5a5a;
+}
+
+.task-card-wrapper {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-bottom: 12px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 6px -1px, rgba(0, 0, 0, 0.06) 0 2px 4px -1px;
+  .task-name {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    margin: 0 -15px 12px;
+    padding: 0 15px 4px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #dbdbdb;
+    a {
+      font-size: 14px;
+      font-weight: 300;
+    }
+    .action-wrapper {
+      display: flex;
+      gap: 8px;
+
+      .tm-submit-button {
+        border: none;
+        padding: 0; 
+      }
+    }
+  }
+  .team-members {
+    font-weight: 300;
+    font-size: 14px;
+    margin: 24px -15px 0;
+    padding: 4px 15px 0;
+    text-align: end;
+  }
+  .task-desc {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #080808;
+  }
+}
+
+.select2-container {
+  display: block !important;
+  .select2-dropdown {
+    border-radius: 8px;
+  }
+}
+
+.select2-container--default .select2-selection--multiple {
+  padding: 0 7px;
+}
+
+.tm-wrapper {
+  margin-top: 12px;
+  .tm-title {
+    font-size: 19px;
+    font-weight: 600; 
+  }
+  .tm-name {
+    font-size: 16px;
+  }
+}
+
+.swal2-popup {
+  font-size: 1.6rem !important;
+  .swal2-actions {
+    .swal2-confirm {
+      background-color: @purple !important;
+      color: #fff !important;
+    }
+    .swal2-cancel {
+      background-color: #fff !important;
+      border-color: #5A5A5A !important;
+      color: #5A5A5A !important;
+    }
+  }
+}
+
+
+.tm-actions-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2px;
+  .form-cursor {
+    cursor: pointer;
+  }
+  
+  .tm-submit-button {
+    display: block;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+  }
+
+}
+

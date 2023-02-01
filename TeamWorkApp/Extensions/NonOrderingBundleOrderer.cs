@@ -16,7 +16,7 @@ namespace TeamWorkApp.Extensions
     {
         public static Bundle NonOrdering(this Bundle bundle)
         {
-            bundle.Orderer=new NonOrderingBundleOrderer();
+            bundle.Orderer = new NonOrderingBundleOrderer();
             return bundle;
         }
     }
